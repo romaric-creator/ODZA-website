@@ -4,8 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boucherie du Terroir | Votre Spécialiste Porc à Odza</title>
+    <title>Boucherie du Terroir | Votre E-Boucherie à Odza</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLMDJqL2iMFLlWd+x7e8+y+J/85F6WJ+fA+n6L9D/P5rP9F8d6H8xN+rN+j4w=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <style>
         html {
@@ -29,13 +34,15 @@
             background-position: center;
         }
 
+        /* Nouvelle carte plus moderne */
         .product-card {
-            border: 1px solid #eee;
-            transition: border-color .2s;
+            border: 1px solid #f0f0f0;
+            transition: all .3s;
         }
 
         .product-card:hover {
             border-color: #962828;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
         .ultra-bold {
@@ -58,16 +65,26 @@
     </script>
 </head>
 
-<body class="bg-gris-fond text-gray-800" onload="document.body.classList.add('loaded')">
+<body class="bg-gris-fond text-gray-800">
 
-    <header class="sticky top-0 z-50 bg-white shadow-sm">
+    <header class="sticky top-0 z-50 bg-white shadow-lg border-b border-rouge-boucherie/30">
         <div class="container mx-auto p-4 flex justify-between items-center max-w-7xl">
-            <h1 class="text-xl md:text-2xl font-black text-rouge-boucherie tracking-wide">
-                BOUCHERIE DU TERROIR
-            </h1>
-            <nav class="flex gap-6 text-sm">
-                <a href="#catalogue" class="text-gray-700 hover:text-rouge-boucherie">Catalogue</a>
-                <a href="#contact" class="text-gray-700 hover:text-rouge-boucherie">Contact</a>
+            <a href="#catalogue"
+                class="text-xl md:text-2xl font-black text-rouge-boucherie tracking-wide flex items-center gap-2">
+                <i class="fas fa-store text-or-qualite"></i> BOUCHERIE DU TERROIR
+            </a>
+
+            <nav class="flex items-center gap-6 text-sm">
+                <a href="#catalogue"
+                    class="hidden sm:block text-gray-700 hover:text-rouge-boucherie font-medium">Catalogue</a>
+                <a href="#contact"
+                    class="hidden sm:block text-gray-700 hover:text-rouge-boucherie font-medium">Contact</a>
+
+                <button id="cart-icon-btn" class="relative p-2 rounded-full bg-gris-fond hover:bg-gray-200 transition">
+                    <i class="fas fa-shopping-basket text-xl text-rouge-boucherie"></i>
+                    <span id="cart-count"
+                        class="absolute top-0 right-0 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white transform translate-x-1/2 -translate-y-1/2 bg-or-qualite rounded-full">0</span>
+                </button>
             </nav>
         </div>
     </header>
@@ -85,6 +102,31 @@
         </a>
     </section>
 
+    <section class="bg-white py-12 shadow-inner">
+        <div class="container mx-auto px-4 max-w-7xl">
+            <h3 class="text-2xl ultra-bold text-center text-rouge-boucherie mb-10">
+                Nos Engagements Qualité
+            </h3>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <div class="p-6 border-b-4 border-rouge-boucherie rounded-lg transition hover:shadow-xl">
+                    <i class="fas fa-temperature-low text-5xl text-or-qualite mb-4"></i>
+                    <h4 class="font-bold text-xl mb-2">Chaîne de Froid Garantie</h4>
+                    <p class="text-gray-600">Viande 100% fraîche, contrôlée de l'élevage à votre assiette.</p>
+                </div>
+                <div class="p-6 border-b-4 border-or-qualite rounded-lg transition hover:shadow-xl">
+                    <i class="fas fa-map-marked-alt text-5xl text-rouge-boucherie mb-4"></i>
+                    <h4 class="font-bold text-xl mb-2">Porc du Terroir</h4>
+                    <p class="text-gray-600">Soutien aux éleveurs locaux d'Odza. Traçabilité assurée.</p>
+                </div>
+                <div class="p-6 border-b-4 border-rouge-boucherie rounded-lg transition hover:shadow-xl">
+                    <i class="fas fa-cut text-5xl text-or-qualite mb-4"></i>
+                    <h4 class="font-bold text-xl mb-2">Coupes sur Mesure</h4>
+                    <p class="text-gray-600">Préparation artisanale de vos coupes selon vos besoins spécifiques.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="catalogue" class="container mx-auto px-4 py-12 max-w-7xl">
         <h3 class="text-4xl ultra-bold text-center text-rouge-boucherie mb-12">
             Le Menu du Jour 🥩
@@ -92,9 +134,9 @@
 
         <div class="flex flex-col md:flex-row gap-4 mb-12 bg-white p-4 rounded-xl shadow-md">
             <input type="text" id="search-input" placeholder="Rechercher une coupe (Ex: Saucisse)"
-                class="flex-grow p-3 border rounded-lg" oninput="filterProducts()">
+                class="flex-grow p-3 border rounded-lg">
 
-            <select id="category-filter" class="p-3 border rounded-lg md:w-56" onchange="filterProducts()">
+            <select id="category-filter" class="p-3 border rounded-lg md:w-56">
                 <option value="all">Toutes les catégories</option>
                 <option value="Viande/Coupes">Viande & Coupes</option>
                 <option value="Charcuterie">Charcuterie</option>
@@ -110,15 +152,18 @@
     <section id="contact" class="bg-gray-800 text-white py-12">
         <div class="container mx-auto max-w-7xl px-4">
             <h3 class="text-3xl ultra-bold text-or-qualite mb-6 text-center">Contact & Retrait</h3>
-            <p class="text-center text-gray-300 mb-6">
-                Venez à ODZA (point de repère : à préciser)
+            <p class="text-center text-gray-300 mb-2">
+                📍 Retrait à ODZA (point de repère : à préciser)
+            </p>
+            <p class="text-center text-gray-400 text-md mb-6 font-semibold">
+                🕰️ Horaires : Lundi - Samedi, 8h00 - 18h00
             </p>
 
             <div class="text-center">
-                <a id="wa-btn" href="#" target="_blank"
+                <button id="wa-btn"
                     class="inline-block px-6 py-3 bg-green-500 font-bold text-white rounded-full shadow hover:bg-green-600 transition">
-                    Commander sur WhatsApp
-                </a>
+                    Finaliser ma Commande sur WhatsApp
+                </button>
             </div>
 
             <p class="text-center text-gray-500 text-sm mt-10">
@@ -127,101 +172,256 @@
         </div>
     </section>
 
-    <script>
-        const WHATSAPP_NUMBER = "+237680572187"; // <<< MET TON NUMÉRO ICI ✅
+    <script defer>
 
-        const products = [
-            {
-                name: "Viande Fraîche",
-                category: "Viande/Coupes",
-                price: 2500,
-                unit: "Kg",
-                description: "Filet, côtes, épaule — porcs élevés localement.",
-                image: "https://epiceriesevelin.com/wp-content/uploads/2015/07/charcuteries-1024x768.jpg"
-            },
-            {
-                name: "Têtes de Porc",
-                category: "Abats",
-                price: 1500,
-                unit: "Pièce",
-                description: "Parfaites pour soupes et bouillons.",
-                image: "https://epiceriesevelin.com/wp-content/uploads/2015/07/charcuteries-1024x768.jpg"
-            },
-            {
-                name: "Pattes de Porc",
-                category: "Abats",
-                price: 1800,
-                unit: "Kg",
-                description: "Très appréciées pour recettes traditionnelles.",
-                image: "https://epiceriesevelin.com/wp-content/uploads/2015/07/charcuteries-1024x768.jpg"
+        document.addEventListener('DOMContentLoaded', function () {
 
-            },
-            {
-                name: "Boyaux",
-                category: "Abats",
-                price: 1000,
-                unit: "Kg",
-                description: "Triperie prête pour préparation charcutière.",
-                image: "https://epiceriesevelin.com/wp-content/uploads/2015/07/charcuteries-1024x768.jpg"
+            // --- CONSTANTES ET SÉLECTION D'ÉLÉMENTS ---
+            // J'ai corrigé 'var' en 'const' pour WHATSAPP_NUMBER pour la cohérence
+            const WHATSAPP_NUMBER = "+237680572187";
+            const grid = document.getElementById('product-grid');
+            const noResults = document.getElementById('no-results');
+            const searchInput = document.getElementById('search-input');
+            const categoryFilter = document.getElementById('category-filter');
+            const waBtn = document.getElementById("wa-btn");
+            const cartCountElement = document.getElementById('cart-count');
+            const cartIconBtn = document.getElementById('cart-icon-btn');
 
-            },
-            {
-                name: "Peau (Couenne)",
-                category: "Autres",
-                price: 800,
-                unit: "Kg",
-                description: "Parfaite pour croustillant ou épaissir sauces.",
-                image: "https://epiceriesevelin.com/wp-content/uploads/2015/07/charcuteries-1024x768.jpg"
+            let cart = [];
 
-            },
-            {
-                name: "Saucisses Artisanales",
-                category: "Charcuterie",
-                price: 3000,
-                unit: "Kg",
-                description: "Recette locale, parfaite à griller.",
-                image: "https://epiceriesevelin.com/wp-content/uploads/2015/07/charcuteries-1024x768.jpg"
+            // --- BASE DE DONNÉES PRODUITS (in changée) ---
+            const products = [
+                {
+                    name: "Viande Fraîche", category: "Viande/Coupes", price: 2500, unit: "Kg",
+                    description: "Filet, côtes, épaule — porcs élevés localement.",
+                    image: "https://epiceriesevelin.com/wp-content/uploads/2015/07/charcuteries-1024x768.jpg", stock: true
+                },
+                {
+                    name: "Têtes de Porc", category: "Abats", price: 1500, unit: "Pièce",
+                    description: "Parfaites pour soupes et bouillons.",
+                    image: "https://epiceriesevelin.com/wp-content/uploads/2015/07/charcuteries-1024x768.jpg", stock: true
+                },
+                {
+                    name: "Pattes de Porc", category: "Abats", price: 1800, unit: "Kg",
+                    description: "Très appréciées pour recettes traditionnelles.",
+                    image: "https://epiceriesevelin.com/wp-content/uploads/2015/07/charcuteries-1024x768.jpg", stock: false
+                },
+                {
+                    name: "Boyaux", category: "Abats", price: 1000, unit: "Kg",
+                    description: "Triperie prête pour préparation charcutière.",
+                    image: "https://epiceriesevelin.com/wp-content/uploads/2015/07/charcuteries-1024x768.jpg", stock: true
+                },
+                {
+                    name: "Peau (Couenne)", category: "Autres", price: 800, unit: "Kg",
+                    description: "Parfaite pour croustillant ou épaissir sauces.",
+                    image: "https://epiceriesevelin.com/wp-content/uploads/2015/07/charcuteries-1024x768.jpg", stock: true
+                },
+                {
+                    name: "Saucisses Artisanales", category: "Charcuterie", price: 3000, unit: "Kg",
+                    description: "Recette locale, parfaite à griller.",
+                    image: "https://epiceriesevelin.com/wp-content/uploads/2015/07/charcuteries-1024x768.jpg", stock: true
+                }
+            ];
 
+
+            // --- FONCTIONS CLÉS PANIER ET AFFICHAGE ---
+
+            function updateCartDisplay() {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCountElement.textContent = totalItems;
+
+                // Mise à jour du bouton Finaliser
+                waBtn.disabled = totalItems === 0;
+                waBtn.classList.toggle('bg-green-500', totalItems > 0);
+                waBtn.classList.toggle('bg-gray-400', totalItems === 0);
+                waBtn.textContent = totalItems > 0 ? `Finaliser ma Commande (${totalItems} articles)` : 'Finaliser ma Commande';
             }
-        ];
 
-        const grid = document.getElementById('product-grid');
-        const noResults = document.getElementById('no-results');
+            /**
+             * Change la quantité dans le champ d'input (utilisée par la délégation).
+             */
+            function changeQuantity(inputId, delta) {
+                const input = document.getElementById(inputId);
+                let currentQty = parseInt(input.value) || 1;
+                let newQty = currentQty + delta;
 
-        function createProductCard(product) {
-            const message = encodeURIComponent(`Bonjour, je souhaite commander : ${product.name}. Prix : ${product.price} FCFA/${product.unit}`);
-            const link = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+                if (newQty < 1) {
+                    newQty = 1;
+                }
 
-            return `
-            <div class="product-card bg-white p-5 rounded-lg shadow">
-                <img src="${product.image}" class="w-full h-44 object-cover rounded-lg mb-3">
-                <h4 class="text-2xl ultra-bold">${product.name}</h4>
-                <p class="text-sm text-gray-600 mb-3">${product.description}</p>
-                <div class="flex justify-between items-center mb-4">
-                    <span class="text-3xl text-rouge-boucherie font-black">${product.price}</span>
-                    <span class="text-gray-500 text-sm">FCFA/${product.unit}</span>
+                input.value = newQty;
+            }
+
+            /**
+             * Ajoute un produit au panier (utilisée par la délégation).
+             */
+            function addProductToCart(productName) {
+                const inputId = `qty-${productName.replace(/\s/g, '-')}`;
+                const quantityInput = document.getElementById(inputId);
+                const quantity = parseInt(quantityInput.value) || 1;
+
+                if (quantity < 1) return alert("Veuillez choisir une quantité valide.");
+
+                const existingItemIndex = cart.findIndex(item => item.name === productName);
+
+                if (existingItemIndex > -1) {
+                    cart[existingItemIndex].quantity += quantity;
+                } else {
+                    cart.push({ name: productName, quantity: quantity });
+                }
+
+                // Animation du bouton (code d'animation inchangé)
+                const button = quantityInput.closest('.flex-col').querySelector('button[data-action="add-to-cart"]');
+                if (button) {
+                    button.classList.add('bg-green-500', 'hover:bg-green-600', 'ring-4', 'ring-green-300');
+                    button.classList.remove('bg-rouge-boucherie', 'hover:bg-red-700');
+                    button.textContent = 'Ajouté !';
+                    setTimeout(() => {
+                        button.classList.remove('bg-green-500', 'hover:bg-green-600', 'ring-4', 'ring-green-300');
+                        button.classList.add('bg-rouge-boucherie', 'hover:bg-red-700');
+                        button.textContent = 'Ajouter au Panier';
+                    }, 800);
+                }
+
+                quantityInput.value = 1;
+                updateCartDisplay();
+            }
+
+
+            function createProductCard(product) {
+                const inputId = `qty-${product.name.replace(/\s/g, '-')}`;
+                const productPriceDisplay = product.price.toLocaleString('fr-FR');
+
+                const stockStatus = product.stock
+                    ? '<span class="text-xs font-semibold py-1 px-2 rounded text-green-700 bg-green-100">En Stock</span>'
+                    : '<span class="text-xs font-semibold py-1 px-2 rounded text-red-700 bg-red-100">Épuisé</span>';
+
+                const topVenteBadge = product.category === "Charcuterie"
+                    ? '<span class="absolute top-3 left-3 bg-or-qualite text-rouge-boucherie text-xs font-bold px-3 py-1 rounded-full shadow-md z-10">🔥 TOP VENTE</span>'
+                    : '';
+
+                const buttonClass = product.stock
+                    ? 'bg-rouge-boucherie hover:bg-red-700'
+                    : 'bg-gray-400 cursor-not-allowed';
+
+                const buttonText = product.stock ? 'Ajouter au Panier' : 'Indisponible';
+
+                // UTILISATION DE data-action (Délégation d'événements)
+                const buttonAction = product.stock
+                    ? `data-action="add-to-cart" data-product-name="${product.name}"`
+                    : '';
+
+                const plusAction = product.stock ? `data-action="change-qty" data-input-id="${inputId}" data-delta="1"` : '';
+                const minusAction = product.stock ? `data-action="change-qty" data-input-id="${inputId}" data-delta="-1"` : '';
+
+
+                return `
+            <div class="product-card bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                
+                <div class="relative">
+                    <img src="${product.image}" class="w-full h-48 object-cover" alt="Image de ${product.name}">
+                    ${topVenteBadge}
                 </div>
-                <a href="${link}" target="_blank"
-                class="block text-center py-2 bg-green-500 text-white font-bold rounded-lg hover:bg-green-600 transition">
-                    Commander
-                </a>
+
+                <div class="p-5">
+                    <h4 class="text-xl font-extrabold text-gray-900 mb-1">${product.name}</h4>
+                    <p class="text-sm text-gray-500 mb-3 h-10 overflow-hidden">${product.description}</p>
+                    
+                    <div class="flex justify-between items-center mb-4">
+                        <div class="text-4xl ultra-bold text-rouge-boucherie">
+                            ${productPriceDisplay} <span class="text-sm font-normal align-top">FCFA/${product.unit}</span>
+                        </div>
+                        ${stockStatus}
+                    </div>
+                    
+                    <div class="flex flex-col gap-3">
+                        
+                        <div class="flex justify-center items-center gap-3">
+                            <button ${minusAction} class="w-8 h-8 text-white bg-gray-500 rounded-full hover:bg-gray-600 transition disabled:opacity-50" ${product.stock ? '' : 'disabled'}>-</button>
+                            <input type="number" id="${inputId}" value="1" min="1" max="99" 
+                                class="w-16 p-1 border rounded-lg text-center font-bold text-lg focus:ring-rouge-boucherie focus:border-rouge-boucherie" ${product.stock ? '' : 'disabled'}>
+                            <button ${plusAction} class="w-8 h-8 text-white bg-gray-500 rounded-full hover:bg-gray-600 transition disabled:opacity-50" ${product.stock ? '' : 'disabled'}>+</button>
+                        </div>
+
+                        <button ${buttonAction}
+                            class="w-full py-3 text-white font-bold rounded-lg transition shadow-md ${buttonClass}" ${product.stock ? '' : 'disabled'}>
+                            ${buttonText}
+                        </button>
+                    </div>
+                </div>
             </div>`;
-        }
+            }
 
-        function filterProducts() {
-            const text = document.getElementById('search-input').value.toLowerCase();
-            const cat = document.getElementById('category-filter').value;
-            let results = products.filter(p =>
-                (cat === "all" || p.category === cat) &&
-                (p.name.toLowerCase().includes(text) || p.description.toLowerCase().includes(text))
-            );
-            grid.innerHTML = results.map(createProductCard).join('');
-            noResults.classList.toggle('hidden', results.length !== 0);
-        }
+            function filterProducts() {
+                const text = searchInput.value.toLowerCase();
+                const cat = categoryFilter.value;
+                let results = products.filter(p =>
+                    (cat === "all" || p.category === cat) &&
+                    (p.name.toLowerCase().includes(text) || p.description.toLowerCase().includes(text))
+                );
+                grid.innerHTML = results.map(createProductCard).join('');
+                noResults.classList.toggle('hidden', results.length !== 0);
+            }
 
-        document.addEventListener('DOMContentLoaded', () => {
+            function finalizeOrder() {
+                if (cart.length === 0) {
+                    alert("Votre panier est vide. Ajoutez des produits avant de commander !");
+                    return;
+                }
+
+                let message = "🥩 COMMANDE BOUCHERIE DU TERROIR 🥩\n\n";
+                let totalPrice = 0;
+
+                cart.forEach(item => {
+                    const productData = products.find(p => p.name === item.name);
+                    if (!productData) return;
+
+                    const itemPrice = productData.price * item.quantity;
+                    totalPrice += itemPrice;
+
+                    message += `- ${item.quantity} ${productData.unit} de ${item.name} (${itemPrice.toLocaleString('fr-FR')} FCFA)\n`;
+                });
+
+                message += `\n\n💰 TOTAL À PAYER : ${totalPrice.toLocaleString('fr-FR')} FCFA\n\n`;
+                message += "Merci de confirmer votre commande. J'attends votre confirmation pour la disponibilité et les modalités de retrait à ODZA.";
+
+                window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank');
+            }
+
+            // --- ÉVÉNEMENTS & INITIALISATION ---
+
+            // DÉLÉGATION D'ÉVÉNEMENTS : Un seul écouteur pour la grille
+            grid.addEventListener('click', (event) => {
+                const target = event.target;
+
+                // 1. GESTION DES BOUTONS DE QUANTITÉ (+/-)
+                const qtyButton = target.closest('button[data-action="change-qty"]');
+                if (qtyButton) {
+                    const inputId = qtyButton.dataset.inputId;
+                    const delta = parseInt(qtyButton.dataset.delta);
+                    changeQuantity(inputId, delta);
+                    return;
+                }
+
+                // 2. GESTION DU BOUTON AJOUTER AU PANIER
+                const cartButton = target.closest('button[data-action="add-to-cart"]');
+                if (cartButton) {
+                    const productName = cartButton.dataset.productName;
+                    addProductToCart(productName);
+                }
+            });
+
+
+            // Attachement des écouteurs d'événements pour le filtre, la recherche et la finalisation
+            searchInput.addEventListener('input', filterProducts);
+            categoryFilter.addEventListener('change', filterProducts);
+            waBtn.addEventListener('click', finalizeOrder);
+            cartIconBtn.addEventListener('click', finalizeOrder);
+
+            // Initialisation de la page
             filterProducts();
-            document.getElementById("wa-btn").href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent('Bonjour, je souhaite passer une commande')}`;
+            updateCartDisplay();
+            document.body.classList.add('loaded');
         });
     </script>
 </body>
